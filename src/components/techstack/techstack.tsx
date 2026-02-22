@@ -1,0 +1,76 @@
+import React from 'react';
+import { FaGithub, FaGitlab, FaDocker, FaJava, FaPython, FaJs, FaReact, FaDatabase, FaNodeJs } from 'react-icons/fa';
+import { SiCplusplus, SiPostgresql, SiMongodb, SiMysql, SiSqlite, SiVisualstudio, SiTypescript, SiScikitlearn, SiFlutter } from 'react-icons/si';
+import { useScrollAnimation } from '../../hooks/useScrollAnimation';
+
+import './techstack.scss';
+
+const Techstack: React.FC = () => {
+  const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.15 });
+
+  return (
+    <div
+      className={`about-technologies-container ${isVisible ? 'visible' : ''}`}
+      ref={elementRef}
+    >
+      <section className="about-technologies">
+        <h2>My Techstack</h2>
+        <div className="technology-categories">
+          <div className="technology-category">
+            <h3>Languages</h3>
+            <div className="technology-items">
+              {/* <div className="technology-item"><SiCsharp /><p>C#</p></div> */}
+              <div className="technology-item"><FaJava /><p>Java</p></div>
+              <div className="technology-item"><SiCplusplus /><p>C++</p></div>
+              <div className="technology-item"><FaPython /><p>Python</p></div>
+              <div className="technology-item"><FaDatabase /><p>SQL</p></div>
+              <div className="technology-item"><SiMysql /><p>MySQL</p></div>
+              <div className="technology-item"><SiSqlite /><p>SQLite</p></div>
+              <div className="technology-item"><SiPostgresql /><p>PostgreSQL</p></div>
+              <div className="technology-item"><FaJs /><p>JavaScript</p></div>
+              <div className="technology-item"><SiTypescript /><p>TypeScript</p></div>
+              {/* <div className="technology-item"><SiGo /><p>Go</p></div> */}
+            </div>
+          </div>
+
+          <div className="technology-category">
+            <h3>Frameworks</h3>
+            <div className="technology-items">
+              {/* <div className="technology-item"><SiDotnet /><p>ASP.NET</p></div> */}
+              {/* <div className="technology-item"><SiDotnet /><p>WPF</p></div> */}
+              {/* <div className="technology-item"><SiXamarin /><p>Xamarin</p></div> */}
+              <div className="technology-item"><FaNodeJs /><p>NodeJS</p></div>
+              <div className="technology-item"><SiFlutter /><p>Flutter</p></div>
+              {/* <div className="technology-item"><SiRedis /><p>Redis</p></div> */}
+              {/* <div className="technology-item"><SiRabbitmq /><p>RabbitMQ</p></div> */}
+              <div className="technology-item"><SiScikitlearn /><p>SCSS</p></div>
+            </div>
+          </div>
+
+          <div className="technology-category">
+            <h3>Developer Tools</h3>
+            <div className="technology-items">
+              <div className="technology-item"><SiSqlite /><p>SSMS</p></div>
+              <div className="technology-item"><FaGithub /><p>GitHub</p></div>
+              <div className="technology-item"><FaGitlab /><p>GitLab</p></div>
+              <div className="technology-item"><FaDocker /><p>Docker</p></div>
+              {/* <div className="technology-item"><FaJira /><p>Jira</p></div> */}
+              <div className="technology-item"><SiVisualstudio /><p>Visual Studio</p></div>
+            </div>
+          </div>
+
+          <div className="technology-category">
+            <h3>Libraries</h3>
+            <div className="technology-items">
+              <div className="technology-item"><FaReact /><p>React</p></div>
+              <div className="technology-item"><FaPython /><p>PyGame</p></div>
+              <div className="technology-item"><SiMongodb /><p>MongoDB</p></div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
+
+export default Techstack;
