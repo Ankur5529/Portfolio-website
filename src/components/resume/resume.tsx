@@ -2,7 +2,7 @@ import { ResumeData } from './resumetypes';
 import resumeData from '../../data/resume.json';
 import './resume.scss';
 import VisualAid from './visualaid';
-import ankurResume from '../../assets/resume/Ankur_kumar.pdf';
+import ankurResume from '../../assets/resume/main_resume (1).pdf';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 const Resume: React.FC = () => {
