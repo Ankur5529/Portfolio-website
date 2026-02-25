@@ -181,7 +181,7 @@ const topLines = [
   "Exploring technology, one project at a time.",
   "Passionate about innovation, design, and development.",
   "Welcome aboard! Let's explore my world of tech.",
-  "Hi! I'm Sunny — developer, creator, and problem solver.",
+  "Hi! I'm Ankur — developer, creator, and problem solver.",
   "Creating code that connects ideas with innovation.",
   "Bringing imagination to life through technology.",
 ];
@@ -264,7 +264,7 @@ const Hero: React.FC = () => {
     <HeroContainer id="hero">
       <LeftContainer>
         <TopLine>{topLine}</TopLine>
-        <GradientText>I'm Sunny Kumar.</GradientText>
+        <GradientText>I'm Ankur Kumar.</GradientText>
         <TypewriterText>{currentText}</TypewriterText>
       </LeftContainer>
 

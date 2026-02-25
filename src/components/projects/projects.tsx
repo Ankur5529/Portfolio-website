@@ -1,23 +1,136 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FaGithub, FaGlobe } from 'react-icons/fa';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
-// Importing assets for project GIFs
-import davis from '../../assets/projects/davis.gif';
-import BarberAppointment from '../../assets/projects/BarberAppointment.gif';
-import StudentPredictor from '../../assets/projects/StudentPredictor.gif';
-import StudentPortfolio from '../../assets/projects/StudentPortfolio.gif';
-import WeatherApp from '../../assets/projects/WeatherApp.gif';
+// --- Importing assets for Amazon Clone ---
+import ac1 from '../../assets/projects/Amazonn clone/main.png';
+import ac2 from '../../assets/projects/Amazonn clone/Division section.png';
+import ac3 from '../../assets/projects/Amazonn clone/middle part.png';
+import ac4 from '../../assets/projects/Amazonn clone/Footer.png';
+
+// --- Importing assets for Expense tracker ---
+import et1 from '../../assets/projects/Expense tracker/main.png';
+import et2 from '../../assets/projects/Expense tracker/login page.png';
+import et3 from '../../assets/projects/Expense tracker/dashboard 1.png';
+import et4 from '../../assets/projects/Expense tracker/dashboard 2.png';
+
+// --- Importing assets for Face Emotion detection ---
+import fed1 from '../../assets/projects/Face Emotion detection/Main .png';
+import fed2 from '../../assets/projects/Face Emotion detection/1.jpg';
+import fed3 from '../../assets/projects/Face Emotion detection/2.jpg';
+import fed4 from '../../assets/projects/Face Emotion detection/3.jpg';
+import fed5 from '../../assets/projects/Face Emotion detection/4.jpg';
+import fed6 from '../../assets/projects/Face Emotion detection/5.jpg';
+
+// --- Importing assets for Football Match Analysis ---
+import fma1 from '../../assets/projects/Footboll match analysis system/main_page.png';
+import fma2 from '../../assets/projects/Footboll match analysis system/loading_1.png';
+import fma3 from '../../assets/projects/Footboll match analysis system/loading_2.png';
+import fma4 from '../../assets/projects/Footboll match analysis system/res_1.png';
+import fma5 from '../../assets/projects/Footboll match analysis system/res_2.png';
+// @ts-ignore
+import fmaVideo from '../../assets/projects/Footboll match analysis system/processed_6f20b063-81bf-4c0d-b5c1-61c85926ea59_My Video-1.mp4';
+
+// --- Importing assets for Notes sphere ---
+import ns1 from '../../assets/projects/Notes sphere/main.png';
+import ns2 from '../../assets/projects/Notes sphere/screenshot.png';
+import ns3 from '../../assets/projects/Notes sphere/login.png';
+import ns4 from '../../assets/projects/Notes sphere/signup.png';
+import ns5 from '../../assets/projects/Notes sphere/dashboard.png';
+
+const projectMedia = {
+  amazon: [{ type: 'img', src: ac1 }, { type: 'img', src: ac2 }, { type: 'img', src: ac3 }, { type: 'img', src: ac4 }],
+  expense: [{ type: 'img', src: et1 }, { type: 'img', src: et2 }, { type: 'img', src: et3 }, { type: 'img', src: et4 }],
+  emotion: [{ type: 'img', src: fed1 }, { type: 'img', src: fed2 }, { type: 'img', src: fed3 }, { type: 'img', src: fed4 }, { type: 'img', src: fed5 }, { type: 'img', src: fed6 }],
+  football: [{ type: 'img', src: fma1 }, { type: 'img', src: fma2 }, { type: 'img', src: fma3 }, { type: 'video', src: fmaVideo }, { type: 'img', src: fma4 }, { type: 'img', src: fma5 }],
+  notes: [{ type: 'img', src: ns1 }, { type: 'img', src: ns2 }, { type: 'img', src: ns3 }, { type: 'img', src: ns4 }, { type: 'img', src: ns5 }]
+};
+
+const NavButton = styled.button`
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 20px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border-radius: 50%;
+  z-index: 10;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+
+  &:hover {
+    background: var(--gradient-secondary);
+    border-color: transparent;
+    transform: translateY(-50%) scale(1.15);
+    box-shadow: 0 0 20px var(--accent-secondary);
+  }
+
+  &.left {
+    left: 15px;
+  }
+
+  &.right {
+    right: 15px;
+  }
+`;
+
+const MediaSlider: React.FC<{ media: { type: string, src: string }[] }> = ({ media }) => {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const prev = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? media.length - 1 : prevIndex - 1));
+  };
+
+  const next = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setCurrentIndex((prevIndex) => (prevIndex === media.length - 1 ? 0 : prevIndex + 1));
+  };
+
+  const currentMedia = media[currentIndex];
+
+  return (
+    <div className="media-container">
+      {media.length > 1 && (
+        <NavButton className="left" onClick={prev}>
+          &#10094;
+        </NavButton>
+      )}
+      {currentMedia.type === 'video' ? (
+        <video src={currentMedia.src} autoPlay muted loop playsInline />
+      ) : (
+        <img src={currentMedia.src} alt="Project Media" />
+      )}
+      {media.length > 1 && (
+        <NavButton className="right" onClick={next}>
+          &#10095;
+        </NavButton>
+      )}
+    </div>
+  );
+};
 
 // Main container for all projects
 const ProjectsContainer = styled.div`
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
   color: var(--text-primary);
   font-family: 'Inter', sans-serif;
-  padding: 60px 10px;
+  padding: 80px 10px;
   overflow-x: hidden;
   width: 85%;
   max-width: 1400px;
@@ -31,23 +144,53 @@ const ProjectsContainer = styled.div`
     opacity: 1;
     transform: translateY(0);
   }
+
+  /* Decorative Background Glows */
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(150px);
+    z-index: -1;
+    opacity: 0.15;
+    pointer-events: none;
+  }
+  
+  &::before {
+    top: 5%;
+    left: -10%;
+    width: 600px;
+    height: 600px;
+    background: var(--accent-primary);
+  }
+
+  &::after {
+    bottom: 20%;
+    right: -10%;
+    width: 500px;
+    height: 500px;
+    background: var(--accent-tertiary);
+  }
 `;
 
 // Title for the projects section
 const SectionTitle = styled.h2`
-  font-size: 3em;
-  margin-bottom: 50px;
+  font-size: 3.5em;
+  margin-bottom: 60px;
   text-align: center;
   width: 100%;
-  background: var(--gradient-primary);
+  background: var(--gradient-secondary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   font-family: 'Poppins', sans-serif;
   font-weight: 800;
+  letter-spacing: 1px;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
   
   @media (max-width: 768px) {
-    font-size: 2.2em;
+    font-size: 2.5em;
+    margin-bottom: 40px;
   }
 `;
 
@@ -63,34 +206,49 @@ const BigProjectsContainer = styled.div`
 // Container for individual projects with glassmorphism
 const ProjectContainer = styled.div`
   width: 100%;
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 24px;
   padding: 40px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 32px var(--shadow-color);
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2), inset 0 0 0 1px rgba(255,255,255,0.05);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
   &:hover {
     transform: translateY(-10px);
-    box-shadow: 0 15px 50px var(--shadow-color);
-    border-color: var(--accent-primary);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    border-color: var(--accent-secondary);
+  }
+
+  /* Media container for slider */
+  .media-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 30px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: inset 0 4px 20px rgba(0,0,0,0.4);
+    padding: 10px;
   }
 
   /* Background image with parallax effect */
   img, video {
     width: 100%;
     max-height: 400px;
-    border-radius: 16px;
-    object-fit: cover;
-    margin-bottom: 25px;
+    border-radius: 12px;
+    object-fit: contain;
+    display: block;
     opacity: 0.9;
-    transition: all 0.4s ease;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: all 0.5s ease;
   }
   
   &:hover img, &:hover video {
@@ -99,54 +257,63 @@ const ProjectContainer = styled.div`
   }
 
   h3 {
-    font-size: 2em;
+    font-size: 2.2em;
     margin-bottom: 15px;
-    color: var(--accent-primary);
-    font-weight: 700;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 800;
+    letter-spacing: -0.5px;
     
     @media (max-width: 768px) {
-      font-size: 1.6em;
+      font-size: 1.8em;
     }
   }
 
   p {
     font-size: 1.15em;
-    margin-bottom: 25px;
+    margin-bottom: 30px;
     color: var(--text-secondary);
-    line-height: 1.7;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-inline: auto;
     
     @media (max-width: 768px) {
-      font-size: 1em;
+      font-size: 1.05em;
     }
   }
 
   .links {
     display: flex;
     justify-content: center;
-    gap: 25px;
+    gap: 20px;
     flex-wrap: wrap;
   }
 
   a {
-    color: var(--accent-primary);
-    font-size: 1.2em;
+    color: var(--text-primary);
+    font-size: 1.1em;
     display: flex;
     align-items: center;
     gap: 10px;
     text-decoration: none;
-    padding: 12px 24px;
-    border: 2px solid var(--accent-primary);
-    border-radius: 12px;
+    padding: 12px 28px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 30px;
     transition: all 0.3s ease;
-    font-weight: 600;
+    font-weight: 500;
+    backdrop-filter: blur(5px);
 
     svg {
       transition: transform 0.3s ease;
+      font-size: 1.2em;
     }
 
     &:hover {
-      background: var(--accent-primary);
-      color: var(--bg-primary);
+      background: var(--gradient-primary);
+      border-color: transparent;
+      color: white;
       transform: translateY(-3px);
       box-shadow: 0 8px 20px var(--shadow-color);
       
@@ -172,32 +339,47 @@ const SmallProjectsContainer = styled.div`
 
 // Container for individual small projects
 const SmallProject = styled.div`
-  background: var(--glass-bg);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 20px;
   padding: 30px;
   text-align: center;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 8px 32px var(--shadow-color);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
   transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   
   &:hover {
     transform: translateY(-8px) scale(1.02);
-    box-shadow: 0 12px 40px var(--shadow-color);
-    border-color: var(--accent-primary);
+    box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+    border-color: var(--accent-secondary);
+  }
+
+  .media-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 25px;
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    box-shadow: inset 0 4px 15px rgba(0,0,0,0.3);
   }
 
   img, video {
     width: 100%;
     height: 200px;
-    border-radius: 12px;
-    object-fit: cover;
-    margin-bottom: 20px;
-    opacity: 0.85;
-    transition: all 0.3s ease;
+    border-radius: 10px;
+    object-fit: contain;
+    display: block;
+    opacity: 0.9;
+    transition: all 0.4s ease;
   }
   
   &:hover img, &:hover video {
@@ -206,15 +388,17 @@ const SmallProject = styled.div`
   }
 
   h3 {
-    font-size: 1.5em;
+    font-size: 1.6em;
     margin-bottom: 12px;
-    color: var(--accent-primary);
-    font-weight: 600;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    font-weight: 700;
   }
 
   p {
-    font-size: 1em;
-    margin-bottom: 20px;
+    font-size: 1.05em;
+    margin-bottom: 25px;
     color: var(--text-secondary);
     line-height: 1.6;
   }
@@ -227,26 +411,28 @@ const SmallProject = styled.div`
   }
 
   a {
-    color: var(--accent-primary);
+    color: var(--text-primary);
     font-size: 1em;
     display: flex;
     align-items: center;
     gap: 8px;
     text-decoration: none;
-    padding: 10px 18px;
-    border: 2px solid var(--accent-primary);
-    border-radius: 10px;
+    padding: 10px 20px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.2);
+    border-radius: 20px;
     transition: all 0.3s ease;
-    font-weight: 600;
+    font-weight: 500;
 
     svg {
       transition: transform 0.3s ease;
     }
 
     &:hover {
-      background: var(--accent-primary);
-      color: var(--bg-primary);
-      transform: translateY(-2px);
+      background: var(--gradient-primary);
+      color: white;
+      border-color: transparent;
+      transform: translateY(-3px);
       box-shadow: 0 6px 15px var(--shadow-color);
       
       svg {
@@ -255,12 +441,6 @@ const SmallProject = styled.div`
     }
   }
 `;
-
-// Handle the "Coming Soon" click event
-const handleComingSoonClick = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-  event.preventDefault();
-  alert('Coming soon!');
-};
 
 const Projects: React.FC = () => {
   const { elementRef, isVisible } = useScrollAnimation({ threshold: 0.1 });
@@ -274,52 +454,39 @@ const Projects: React.FC = () => {
       <SectionTitle>Projects</SectionTitle>
       <BigProjectsContainer>
         <ProjectContainer>
-          <img src={davis} alt="DAVIS Investment Analysis System" />
-          <h3>DAVIS – Darvas, Volume, Sentiment Analysis</h3>
+          <MediaSlider media={projectMedia.football} />
+          <h3>Football Match Analysis System</h3>
           <p>
-            An AI-driven investment analysis platform that generates stock trading signals
-            by combining Darvas Box Theory, EMAs, volume indicators, and sentiment analysis.
-            It provides real-time insights through an interactive dashboard to support
-            smarter investment decisions.
+            An AI-powered system using Python, OpenCV, YOLO, and Computer Vision to analyze football matches and extract insightful statistics such as player tracking, distance covered, and real-time speed.
           </p>
           <div className="links">
-            <a
-              href="#!"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
+            <a href="https://github.com/Ankur5529/Footboll-match-analysis-system" target="_blank" rel="noopener noreferrer">
               <FaGithub /> See on GitHub
             </a>
-            <a href="#!" target="_blank" rel="noopener noreferrer">
+          </div>
+        </ProjectContainer>
+
+        <ProjectContainer>
+          <MediaSlider media={projectMedia.expense} />
+          <h3>Expense Tracker (MERN)</h3>
+          <p>A full-stack web application built using the MERN stack (MongoDB, Express, React, Node.js) to actively track, visualize, and manage personal daily expenses with an intuitive, responsive user interface.</p>
+          <div className="links">
+            <a href="https://github.com/Ankur5529/Expense_tracker" target="_blank" rel="noopener noreferrer">
+              <FaGithub /> See on GitHub
+            </a>
+            <a href="https://expense-tracker-zeta-orpin.vercel.app" target="_blank" rel="noopener noreferrer">
               <FaGlobe /> Try it Out
             </a>
           </div>
         </ProjectContainer>
 
         <ProjectContainer>
-          <img src={StudentPredictor} alt="Student Performance Prediction" />
-          <h3>Student Performance Prediction</h3>
-          <p>A AI/ML web application built with Streamlit that predicts a student's final grade and pass/fail outcome using trained regression and classification models. It takes basic academic inputs and provides instant predictions with easy visual insights.</p>
+          <MediaSlider media={projectMedia.emotion} />
+          <h3>Face Emotion Detection</h3>
+          <p>A machine learning and computer vision project that leverages deep learning techniques to accurately detect and classify human facial emotions in real-time from live video feeds.</p>
           <div className="links">
-            <a href="https://github.com/sunnykr117/student_performance_prediction" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Ankur5529/Emotion-detection" target="_blank" rel="noopener noreferrer">
               <FaGithub /> See on GitHub
-            </a>
-            <a href="#!" target="_blank" rel="noopener noreferrer">
-              <FaGlobe /> Try it Out
-            </a>
-          </div>
-        </ProjectContainer>
-
-        <ProjectContainer>
-          <img src={BarberAppointment} alt="Barber Appointment App" />
-          <h3>Barber Appointment App</h3>
-          <p>Developed a cross-platform barber appointment management app using Flutter, Supabase, and Riverpod. Features include appointment scheduling, barber availability tracking, and automated notifications.</p>
-          <div className="links">
-            <a href="https://github.com/sunnykr117/barbershop-suite" target="_blank" rel="noopener noreferrer">
-              <FaGithub /> See on GitHub
-            </a>
-            <a href="#!" onClick={handleComingSoonClick}>
-              <FaGlobe /> Try it Out
             </a>
           </div>
         </ProjectContainer>
@@ -327,29 +494,26 @@ const Projects: React.FC = () => {
 
       <SmallProjectsContainer>
         <SmallProject>
-          <img src={WeatherApp} alt="Weather Application" />
-          <h3>Weather Application</h3>
-          <p>Built a weather app that integrated the OpenWeather REST API to display real-time weather conditions with location-based search.</p>
+          <MediaSlider media={projectMedia.notes} />
+          <h3>Notes Sphere</h3>
+          <p>A comprehensive MERN stack note-taking application designed to help users seamlessly organize, securely store, and manage their personal notes.</p>
           <div className="links">
-            <a href="https://github.com/sunnykr117/weatherapp" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Ankur5529/Notes_Sphere_Mern" target="_blank" rel="noopener noreferrer">
               <FaGithub /> See on GitHub
             </a>
-            <a href="#!" target="_blank" rel="noopener noreferrer">
+            <a href="https://notes-sphere-swart.vercel.app" target="_blank" rel="noopener noreferrer">
               <FaGlobe /> Try it Out
             </a>
           </div>
         </SmallProject>
 
         <SmallProject>
-          <img src={StudentPortfolio} alt="Portfolio GIF" />
-          <h3>Portfolio Website</h3>
-          <p>Built in React to showcase my best work and skills. Designed to be maintainable, responsive, and user-friendly.</p>
+          <MediaSlider media={projectMedia.amazon} />
+          <h3>Amazon Clone</h3>
+          <p>A dynamic front-end web application seamlessly replicating the core user interface, e-commerce flow, and responsive design of Amazon.</p>
           <div className="links">
-            <a href="https://github.com/sunnykr117/Portfolio-Builder" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Ankur5529/Amazon_clone" target="_blank" rel="noopener noreferrer">
               <FaGithub /> See on GitHub
-            </a>
-            <a href="#!" onClick={handleComingSoonClick}>
-              <FaGlobe /> You're already here!
             </a>
           </div>
         </SmallProject>
@@ -358,15 +522,15 @@ const Projects: React.FC = () => {
           <h3>More Projects Coming Soon...</h3>
           <p>Stay tuned!</p>
           <div className="links">
-            <a href="https://github.com/sunnykr117" target="_blank" rel="noopener noreferrer">
+            <a href="https://github.com/Ankur5529" target="_blank" rel="noopener noreferrer">
               <FaGithub /> See on GitHub
-            </a>
-            <a href="#!" target="_blank" onClick={handleComingSoonClick} rel="noopener noreferrer">
-              <FaGlobe /> Try it Out
             </a>
           </div>
         </SmallProject>
       </SmallProjectsContainer>
+
+      {/* Modal removed */}
+
     </ProjectsContainer>
   );
 };

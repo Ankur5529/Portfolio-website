@@ -19,7 +19,7 @@ const Header: React.FC = () => {
   return (
     <header className="header-container">
       <a href="#home" className="logo" onClick={(e) => handleClick(e, 'home')}>
-        Sunny Kumar
+        Ankur Kumar
       </a>
 
       <nav className={`nav ${isOpen ? 'open' : ''}`}>
@@ -41,7 +41,7 @@ const Header: React.FC = () => {
         </a>
         <a
           className="button"
-          href="https://github.com/sunnykr117/Portfolio-Builder"
+          href="https://github.com/Ankur5529"
           target="_blank"
           rel="noopener noreferrer"
           onClick={() => setIsOpen(false)}

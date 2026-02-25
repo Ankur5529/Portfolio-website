@@ -2,7 +2,7 @@ import { ResumeData } from './resumetypes';
 import resumeData from '../../data/resume.json';
 import './resume.scss';
 import VisualAid from './visualaid';
-import sunnyResume from '../../assets/resume/SunnyResume.pdf';
+import ankurResume from '../../assets/resume/Ankur_kumar.pdf';
 import { useScrollAnimation } from '../../hooks/useScrollAnimation';
 
 const Resume: React.FC = () => {
@@ -30,8 +30,8 @@ const Resume: React.FC = () => {
         <div className="right-column">
           <div className="pdf-viewer">
             <iframe
-              title="Sunny Kumar Resume"
-              src={sunnyResume}
+              title="Ankur Kumar Resume"
+              src={ankurResume}
               width="100%"
               height="600px"
               style={{ border: 'none' }}

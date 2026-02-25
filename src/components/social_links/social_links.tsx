@@ -162,16 +162,16 @@ const SocialLinks: React.FC = () => {
         Feel free to <span className="highlight">connect</span> with me
       </SocialDescription>
       <SocialIcons>
-        <a href="https://github.com/sunnykr117/" target="_blank" rel="noopener noreferrer" title="GitHub">
+        <a href="https://github.com/Ankur5529" target="_blank" rel="noopener noreferrer" title="GitHub">
           <FaGithub />
         </a>
-        <a href="https://linkedin.com/in/-sunny-kumar-/" target="_blank" rel="noopener noreferrer" title="LinkedIn">
+        <a href="https://www.linkedin.com/in/ankur-kumar-b3aba931a" target="_blank" rel="noopener noreferrer" title="LinkedIn">
           <FaLinkedin />
         </a>
         <a href="#!" target="_blank" rel="noopener noreferrer" title="Website">
           <FaGlobe />
         </a>
-        <a href="https://leetcode.com/u/sunnykr117/" target="_blank" rel="noopener noreferrer" title="LeetCode">
+        <a href="https://www.geeksforgeeks.org/profile/kranku36wo" target="_blank" rel="noopener noreferrer" title="GeeksForGeeks">
           <FaCode />
         </a>
       </SocialIcons>
